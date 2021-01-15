@@ -1,0 +1,19 @@
+ALGORITHM algorithm_name
+VAR
+ a : CHAR
+ longueur : INTEGER:=0
+ nbre_mots : INTEGER:=0 
+ nbre_voy: INTEGER :=0
+BEGIN
+  WHILE (a <> ".") DO
+   l= l+1
+      IF (a=" ") THEN
+     c=c+1
+   ELSE IF (a="e" ou "i" ou "u" ou "a" ou "y" ou "o") THEN
+   d =d+1
+   END_IF
+  END_WHILE
+  write (longueur,nbre_mots,nbre_voy)
+END
+
+
