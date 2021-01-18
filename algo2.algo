@@ -1,0 +1,64 @@
+ALGORITHM ALGO2_sol1
+VAR
+  set1  : ARRAY_OF INTEGER[4];  
+  set2 : ARRAY_OF INTEGER[5];
+  sum : INTEGER :=0 ;
+  i: INTEGER :=0
+  j: INTEGER :=0
+  find : BOOLEAN:=false
+
+BEGIN
+
+ FOR i FROM 0 TO 4 STEP 1  DO
+  FOR j FROM 0 TO 5 STEP 1  DO
+  IF (set1[i]=set2[j]) THEN
+  find=true
+  break;
+  ELSE
+      find=false
+  END_IF
+  END_FOR
+  IF (find=false) THEN
+      sum=sum+set1[i]
+  END_IF
+ END_FOR
+  write (sum)
+END
+ALGORITHM ALGO2_sol2
+VAR
+    set1  : ARRAY_OF INTEGER[4];  
+    set2 : ARRAY_OF INTEGER[5];
+    i: INTEGER :=0
+    j: INTEGER :=0
+    htab : HASH_TABLE<INTEGER>;
+
+BEGIN
+     FOR i FROM 0 TO 4 STEP 1  DO
+     FOR j FROM 0 TO 5 STEP 1  DO
+     htab.get(set2[i])
+     htab.get(set2[j])
+END
+ALGORITHM ALGO2_sol
+VAR
+  set1  : ARRAY_OF INTEGER[];  
+  set2 : ARRAY_OF INTEGER[];
+  sum : INTEGER :=0 ;
+  i: INTEGER :=0
+  j: INTEGER :=0
+  
+
+BEGIN
+
+ FOR i FROM 0 TO set1.length STEP 1  DO
+  FOR j FROM 0 TO set2.length STEP 1  DO
+  IF (set1[i]=set2[j]) THEN
+  find=true
+  break;
+  END_IF
+  END_FOR
+  IF (find=false) THEN
+      sum=sum+set1[i]+set2[j]
+  END_IF
+ END_FOR
+  write (sum)
+END
