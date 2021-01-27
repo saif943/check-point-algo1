@@ -1,7 +1,7 @@
 ALGORITHM ALGO2_sol1
 VAR
-  set1  : ARRAY_OF INTEGER[4];  
-  set2 : ARRAY_OF INTEGER[5];
+  set1  : ARRAY_OF INTEGER[];  
+  set2 : ARRAY_OF INTEGER[];
   sum : INTEGER :=0 ;
   i: INTEGER :=0
   j: INTEGER :=0
@@ -9,8 +9,8 @@ VAR
 
 BEGIN
 
- FOR i FROM 0 TO 4 STEP 1  DO
-  FOR j FROM 0 TO 5 STEP 1  DO
+ FOR i FROM 0 TO set1.length STEP 1  DO
+  FOR j FROM 0 TO set2.length STEP 1  DO
   IF (set1[i]=set2[j]) THEN
   find=true
   break;
@@ -26,18 +26,41 @@ BEGIN
 END
 ALGORITHM ALGO2_sol2
 VAR
-    set1  : ARRAY_OF INTEGER[4];  
-    set2 : ARRAY_OF INTEGER[5];
-    i: INTEGER :=0
-    j: INTEGER :=0
-    htab : HASH_TABLE<INTEGER>;
-
+   VAR
+    set1,set2 : ARRAY_OF INTEGER[20];
+    set_keys : ARRAY_OF INTEGER[40];
+    dict := HASH_TABLE<INTEGER,INTEGER>;
+    i, count : INTEGER;
+    sum : INTEGER := 0;
 BEGIN
-     FOR i FROM 0 TO 4 STEP 1  DO
-     FOR j FROM 0 TO 5 STEP 1  DO
-     htab.get(set2[i])
-     htab.get(set2[j])
+    FOR i FROM 0 TO set1.length -1 STEP 1  DO
+        IF (dict.lookup(set1[i]) = TRUE) THEN
+            count := dict.get(set1[i]);
+            dict.insert(set1[i],count+1);
+        ELSE
+            dict.insert(set1[i],1);
+        END_IF
+    END_FOR
+
+    FOR i FROM 0 TO set2.length -1 STEP 1  DO
+        IF (dict.lookup(set2[i]) = TRUE) THEN
+            count := dict.get(set2[i]);
+            dict.insert(set2[i],count+1);
+        ELSE
+            dict.insert(set2[i],1);
+        END_IF
+    END_FOR
+
+    set_keys := dict.getKeys();
+    FOR i FROM 0 TO set_keys.length -1 STEP 1  DO
+        IF (dict.get(set_keys[i]) = 1) THEN
+            sum := sum +set_keys[i];
+        END_IF
+    END_FOR
+
 END
+
+
 ALGORITHM ALGO2_sol
 VAR
   set1  : ARRAY_OF INTEGER[];  
